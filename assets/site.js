@@ -1,0 +1,1 @@
+function planned(n){alert(n+' is planned for a future academy build. The Quantity Surveyor pathway is fully available now.');}
