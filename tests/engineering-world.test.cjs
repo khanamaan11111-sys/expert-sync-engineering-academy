@@ -67,3 +67,11 @@ test('directory offers a versioned progress backup for seven branches',()=>{
  assert.ok(directory.includes('URL.createObjectURL(blob)'));
  assert.ok(directory.includes('records[id]=values'));
 });
+
+test('progress restore validates backup and asks before replacement',()=>{
+ assert.ok(directory.includes('id="import-progress"'));
+ assert.ok(directory.includes('data.version!==1'));
+ assert.ok(directory.includes('Object.keys(data.branches).length!==allowed.length'));
+ assert.ok(directory.includes('Current progress in this browser will be replaced'));
+ assert.ok(directory.includes('Progress restored successfully for seven branches'));
+});
