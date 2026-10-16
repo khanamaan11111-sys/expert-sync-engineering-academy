@@ -53,3 +53,10 @@ test('next-action recommendation follows first unfinished step',()=>{
  assert.ok(detail.includes('Roadmap complete. Add your project evidence'));
  assert.ok(detail.includes('href="./project-idea-studio.html"'));
 });
+
+test('directory displays per-branch and overall browser-local progress',()=>{
+ assert.ok(directory.includes('id="overview"'));
+ assert.ok(directory.includes('function readProgress(url)'));
+ assert.ok(directory.includes('className="mini-progress"'));
+ assert.ok(directory.includes('window.addEventListener("pageshow",render)'));
+});
