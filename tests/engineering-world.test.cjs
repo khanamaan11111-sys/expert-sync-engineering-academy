@@ -75,3 +75,10 @@ test('progress restore validates backup and asks before replacement',()=>{
  assert.ok(directory.includes('Current progress in this browser will be replaced'));
  assert.ok(directory.includes('Progress restored successfully for seven branches'));
 });
+
+test('single-branch progress reset asks for confirmation and refreshes UI',()=>{
+ assert.ok(detail.includes('id="reset-progress"'));
+ assert.ok(detail.includes('completed.clear()'));
+ assert.ok(detail.includes('You can export a backup from Engineering World first.'));
+ assert.ok(detail.includes('Progress reset for '));
+});
