@@ -89,3 +89,11 @@ test('all pathways offer a project brief with deliverables and safety guidance',
  assert.ok(detail.includes('expert-sync-"+id+"-project-brief.txt'));
  assert.ok(detail.includes('do not work on live equipment without qualified supervision'));
 });
+
+test('branch project notes are browser-local and downloadable',()=>{
+ assert.ok(detail.includes('id="project-notes"'));
+ assert.ok(detail.includes('maxlength="10000"'));
+ assert.ok(detail.includes('expert-sync-project-notes-v1-'));
+ assert.ok(detail.includes('id="download-notes"'));
+ assert.ok(detail.includes('Notes stay in this browser; they are not included in the progress JSON backup.'));
+});
