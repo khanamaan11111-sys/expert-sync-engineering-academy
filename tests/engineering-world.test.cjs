@@ -82,3 +82,10 @@ test('single-branch progress reset asks for confirmation and refreshes UI',()=>{
  assert.ok(detail.includes('You can export a backup from Engineering World first.'));
  assert.ok(detail.includes('Progress reset for '));
 });
+
+test('all pathways offer a project brief with deliverables and safety guidance',()=>{
+ assert.ok(detail.includes('id="deliverables"'));
+ assert.ok(detail.includes('id="download-brief"'));
+ assert.ok(detail.includes('expert-sync-"+id+"-project-brief.txt'));
+ assert.ok(detail.includes('do not work on live equipment without qualified supervision'));
+});
