@@ -46,3 +46,10 @@ test('each branch has four-step roadmap and browser-local progress support',()=>
  assert.ok(detail.includes('expert-sync-pathway-v1-'));
  for(const word of ['Learn','Practice','Build','Present'])assert.ok(detail.includes('["'+word+'",'));
 });
+
+test('next-action recommendation follows first unfinished step',()=>{
+ assert.ok(detail.includes('id="next-action"'));
+ assert.ok(detail.includes('tasks.findIndex((_,i)=>!completed.has(i))'));
+ assert.ok(detail.includes('Roadmap complete. Add your project evidence'));
+ assert.ok(detail.includes('href="./project-idea-studio.html"'));
+});
