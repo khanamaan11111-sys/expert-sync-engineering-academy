@@ -60,3 +60,10 @@ test('directory displays per-branch and overall browser-local progress',()=>{
  assert.ok(directory.includes('className="mini-progress"'));
  assert.ok(directory.includes('window.addEventListener("pageshow",render)'));
 });
+
+test('directory offers a versioned progress backup for seven branches',()=>{
+ assert.ok(directory.includes('id="export-progress"'));
+ assert.ok(directory.includes('expert-sync-engineering-progress'));
+ assert.ok(directory.includes('URL.createObjectURL(blob)'));
+ assert.ok(directory.includes('records[id]=values'));
+});
