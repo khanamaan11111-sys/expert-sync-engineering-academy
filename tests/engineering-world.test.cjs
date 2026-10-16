@@ -97,3 +97,12 @@ test('branch project notes are browser-local and downloadable',()=>{
  assert.ok(detail.includes('id="download-notes"'));
  assert.ok(detail.includes('Notes stay in this browser; they are not included in the progress JSON backup.'));
 });
+
+test('full study backup includes validated progress and project notes',()=>{
+ assert.ok(directory.includes('id="export-study"'));
+ assert.ok(directory.includes('id="import-study"'));
+ assert.ok(directory.includes('expert-sync-engineering-study'));
+ assert.ok(directory.includes('expert-sync-project-notes-v1-'));
+ assert.ok(directory.includes('note.length>10000'));
+ assert.ok(directory.includes('Existing progress AND project notes'));
+});
