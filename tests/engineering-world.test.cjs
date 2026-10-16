@@ -39,3 +39,10 @@ test('mobile viewport and accessible search controls are present',()=>{
  assert.ok(directory.includes('aria-label="Search engineering branches"'));
  assert.ok(directory.includes('aria-live="polite"'));
 });
+test('each branch has four-step roadmap and browser-local progress support',()=>{
+ assert.ok(detail.includes('id="roadmap"'));
+ assert.ok(detail.includes('id="checklist"'));
+ assert.ok(detail.includes('role="progressbar"'));
+ assert.ok(detail.includes('expert-sync-pathway-v1-'));
+ for(const word of ['Learn','Practice','Build','Present'])assert.ok(detail.includes('["'+word+'",'));
+});
