@@ -125,3 +125,13 @@ test('all seven branches provide three-question knowledge checks',()=>{
  assert.ok(scripts.length);
  for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
 });
+
+test('latest knowledge-check scores save locally and appear in directory',()=>{
+ const quiz=fs.readFileSync('engineering-knowledge-check.html','utf8');
+ assert.ok(quiz.includes('expert-sync-quiz-score-v1-'));
+ assert.ok(quiz.includes('Latest score saved in this browser'));
+ assert.ok(directory.includes('Latest knowledge check: '));
+ assert.ok(directory.includes('Knowledge check: not attempted'));
+ const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+ for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
