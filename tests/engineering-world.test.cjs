@@ -159,3 +159,14 @@ test('knowledge check supports feedback and an explicit retry without erasing sa
  const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
  for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
 });
+
+test('knowledge-check results link to branch roadmap and project studio',()=>{
+ const quiz=fs.readFileSync('engineering-knowledge-check.html','utf8');
+ assert.ok(quiz.includes('id="study-links"'));
+ assert.ok(quiz.includes('id="study-pathway"'));
+ assert.ok(quiz.includes('href="./project-idea-studio.html"'));
+ assert.ok(quiz.includes('document.querySelector("#study-links").hidden=true'));
+ assert.ok(quiz.includes('document.querySelector("#study-links").hidden=false'));
+ const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+ for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
