@@ -135,3 +135,12 @@ test('latest knowledge-check scores save locally and appear in directory',()=>{
  const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
  for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
 });
+
+test('full study backup v2 includes quiz scores and restores v1 files',()=>{
+ assert.ok(directory.includes('version:2,exportedAt:'));
+ assert.ok(directory.includes('scores[id]={score:saved.score}'));
+ assert.ok(directory.includes('![1,2].includes(data.version)'));
+ assert.ok(directory.includes('data.version===2&&!validKeys(data.scores)'));
+ assert.ok(directory.includes('localStorage.removeItem("expert-sync-quiz-score-v1-"+id)'));
+ assert.ok(directory.includes('if(data.version===2){if(prepared[id].score===null)'));
+});
