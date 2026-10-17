@@ -106,3 +106,10 @@ test('full study backup includes validated progress and project notes',()=>{
  assert.ok(directory.includes('note.length>10000'));
  assert.ok(directory.includes('Existing progress AND project notes'));
 });
+
+test('personal study summary is downloadable and not presented as a certificate',()=>{
+ assert.ok(directory.includes('id="download-summary"'));
+ assert.ok(directory.includes('expert-sync-study-summary.txt'));
+ assert.ok(directory.includes('Overall progress: '));
+ assert.ok(directory.includes('not an accredited certificate or placement guarantee'));
+});
