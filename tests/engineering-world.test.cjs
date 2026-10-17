@@ -144,3 +144,8 @@ test('full study backup v2 includes quiz scores and restores v1 files',()=>{
  assert.ok(directory.includes('localStorage.removeItem("expert-sync-quiz-score-v1-"+id)'));
  assert.ok(directory.includes('if(data.version===2){if(prepared[id].score===null)'));
 });
+
+test('downloadable study summary includes latest knowledge-check scores',()=>{
+ assert.ok(directory.includes('lines.push(b.name+": "+done+"/4 steps completed", "Latest knowledge check: "+scoreText'));
+ assert.ok(directory.includes('let scoreText="Not attempted"'));
+});
