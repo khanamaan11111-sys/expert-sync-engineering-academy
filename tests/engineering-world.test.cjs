@@ -104,7 +104,7 @@ test('full study backup includes validated progress and project notes',()=>{
  assert.ok(directory.includes('expert-sync-engineering-study'));
  assert.ok(directory.includes('expert-sync-project-notes-v1-'));
  assert.ok(directory.includes('note.length>10000'));
- assert.ok(directory.includes('Existing progress AND project notes'));
+ assert.ok(directory.includes('Existing progress and project notes for all seven branches will be replaced. Version 2 also replaces quiz scores.'));
 });
 
 test('personal study summary is downloadable and not presented as a certificate',()=>{
