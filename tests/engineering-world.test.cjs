@@ -104,7 +104,7 @@ test('full study backup includes validated progress and project notes',()=>{
  assert.ok(directory.includes('expert-sync-engineering-study'));
  assert.ok(directory.includes('expert-sync-project-notes-v1-'));
  assert.ok(directory.includes('note.length>10000'));
- assert.ok(directory.includes('Existing progress AND project notes'));
+ assert.ok(directory.includes('Existing progress and project notes for all seven branches will be replaced. Version 2 also replaces quiz scores.'));
 });
 
 test('personal study summary is downloadable and not presented as a certificate',()=>{
@@ -134,4 +134,18 @@ test('latest knowledge-check scores save locally and appear in directory',()=>{
  assert.ok(directory.includes('Knowledge check: not attempted'));
  const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
  for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
+
+test('full study backup v2 includes quiz scores and restores v1 files',()=>{
+ assert.ok(directory.includes('version:2,exportedAt:'));
+ assert.ok(directory.includes('scores[id]={score:saved.score}'));
+ assert.ok(directory.includes('![1,2].includes(data.version)'));
+ assert.ok(directory.includes('data.version===2&&!validKeys(data.scores)'));
+ assert.ok(directory.includes('localStorage.removeItem("expert-sync-quiz-score-v1-"+id)'));
+ assert.ok(directory.includes('if(data.version===2){if(prepared[id].score===null)'));
+});
+
+test('downloadable study summary includes latest knowledge-check scores',()=>{
+ assert.ok(directory.includes('lines.push(b.name+": "+done+"/4 steps completed", "Latest knowledge check: "+scoreText'));
+ assert.ok(directory.includes('let scoreText="Not attempted"'));
 });
