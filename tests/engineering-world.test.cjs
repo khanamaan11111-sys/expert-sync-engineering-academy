@@ -149,3 +149,13 @@ test('downloadable study summary includes latest knowledge-check scores',()=>{
  assert.ok(directory.includes('lines.push(b.name+": "+done+"/4 steps completed", "Latest knowledge check: "+scoreText'));
  assert.ok(directory.includes('let scoreText="Not attempted"'));
 });
+
+test('knowledge check supports feedback and an explicit retry without erasing saved score',()=>{
+ const quiz=fs.readFileSync('engineering-knowledge-check.html','utf8');
+ assert.ok(quiz.includes('id="retry"'));
+ assert.ok(quiz.includes('Review the explanations above'));
+ assert.ok(quiz.includes('input.checked=false;input.disabled=false'));
+ assert.ok(quiz.includes('retry.hidden=false'));
+ const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+ for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
