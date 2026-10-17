@@ -113,3 +113,15 @@ test('personal study summary is downloadable and not presented as a certificate'
  assert.ok(directory.includes('Overall progress: '));
  assert.ok(directory.includes('not an accredited certificate or placement guarantee'));
 });
+
+test('all seven branches provide three-question knowledge checks',()=>{
+ const quiz=fs.readFileSync('engineering-knowledge-check.html','utf8');
+ assert.ok(detail.includes('id="knowledge-check-link"'));
+ assert.ok(detail.includes('engineering-knowledge-check.html?branch='));
+ for(const id of ids)assert.ok(quiz.includes(id+':{name:'),'missing quiz: '+id);
+ assert.ok(quiz.includes('Your score: '));
+ assert.ok(quiz.includes('Correct answer: '));
+ const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+ assert.ok(scripts.length);
+ for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
