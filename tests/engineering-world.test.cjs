@@ -191,3 +191,14 @@ test('directory shows aggregate quiz progress from valid latest scores only',()=
  const scripts=[...directory.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
  for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
 });
+
+test('directory recommends a next roadmap, knowledge check or project studio',()=>{
+ assert.ok(directory.includes('id="next-learning"'));
+ assert.ok(directory.includes('progressList.find(x=>x.done>0&&x.done<4)'));
+ assert.ok(directory.includes('progressList.find(x=>x.done<4)'));
+ assert.ok(directory.includes('engineering-knowledge-check.html?branch='));
+ assert.ok(directory.includes('All roadmap steps and branch knowledge checks have been attempted.'));
+ assert.ok(directory.includes('nextLink.href="./project-idea-studio.html"'));
+ const scripts=[...directory.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
+ for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
