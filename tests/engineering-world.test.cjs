@@ -213,3 +213,14 @@ test('branch pathway exports a self-reported project portfolio',()=>{
  const scripts=[...pathway.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
  for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
 });
+
+test('guided project notes template protects existing notes and saves through input event',()=>{
+ const pathway=fs.readFileSync('engineering-pathway.html','utf8');
+ assert.ok(pathway.includes('id="notes-template"'));
+ assert.ok(pathway.includes('Replace them with the guided project template?'));
+ assert.ok(pathway.includes('notes.dispatchEvent(new Event("input",{bubbles:true}))'));
+ assert.ok(pathway.includes('7. Evidence or references to attach:'));
+ assert.ok(pathway.includes('included in the full study backup'));
+ const scripts=[...pathway.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
+ for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
