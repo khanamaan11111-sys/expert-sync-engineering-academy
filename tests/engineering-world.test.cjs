@@ -170,3 +170,14 @@ test('knowledge-check results link to branch roadmap and project studio',()=>{
  const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
  for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
 });
+
+test('quiz requires all three answers before scoring and saving',()=>{
+ const quiz=fs.readFileSync('engineering-knowledge-check.html','utf8');
+ assert.ok(quiz.includes('id="answer-status" role="status" aria-live="polite"'));
+ assert.ok(quiz.includes('const missing=data.questions.findIndex'));
+ assert.ok(quiz.includes('Please answer question '));
+ assert.ok(quiz.includes('if(missing!==-1)'));
+ assert.ok(quiz.includes('quiz.addEventListener("change"'));
+ const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+ for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
