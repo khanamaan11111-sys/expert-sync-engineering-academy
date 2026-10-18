@@ -202,3 +202,14 @@ test('directory recommends a next roadmap, knowledge check or project studio',()
  const scripts=[...directory.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
  for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
 });
+
+test('branch pathway exports a self-reported project portfolio',()=>{
+ const pathway=fs.readFileSync('engineering-pathway.html','utf8');
+ assert.ok(pathway.includes('id="download-portfolio"'));
+ assert.ok(pathway.includes('PERSONAL PROJECT PORTFOLIO'));
+ assert.ok(pathway.includes('MY PROJECT NOTES'));
+ assert.ok(pathway.includes('expert-sync-"+id+"-project-portfolio.txt'));
+ assert.ok(pathway.includes('not a verified certificate'));
+ const scripts=[...pathway.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
+ for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
