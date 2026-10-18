@@ -181,3 +181,13 @@ test('quiz requires all three answers before scoring and saving',()=>{
  const scripts=[...quiz.matchAll(/<script>([\s\S]*?)<\/script>/g)];
  for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
 });
+
+test('directory shows aggregate quiz progress from valid latest scores only',()=>{
+ assert.ok(directory.includes('id="quiz-overview"'));
+ assert.ok(directory.includes('let attempted=0,perfect=0,scoreSum=0'));
+ assert.ok(directory.includes('if(saved.score===3)perfect++'));
+ assert.ok(directory.includes('branch knowledge checks attempted'));
+ assert.ok(directory.includes('out of "+(attempted*3)'));
+ const scripts=[...directory.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
+ for(const [,script] of scripts)assert.doesNotThrow(()=>new vm.Script(script));
+});
